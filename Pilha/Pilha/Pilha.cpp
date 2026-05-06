@@ -26,7 +26,7 @@ void menu()
 {
 	int op = 0;
 	while (op != 4) {
-		system("cls"); // somente no windows
+		// system("cls"); // somente no windows
 		cout << "Menu Pilha";
 		cout << endl << endl;
 		cout << "1 - Inicializar Pilha \n";
@@ -51,15 +51,12 @@ void menu()
 		default:
 			break;
 		}
-
-		system("pause"); // somente no windows
 	}
 }
 
 void inicializar()
 {
-
-	// se a lista j� possuir elementos
+	// se a lista já possuir elementos
 	// libera a memoria ocupada
 	NO* aux = topo;
 	while (aux != NULL) {
@@ -80,20 +77,29 @@ void push()
 	NO* novo = (NO*)malloc(sizeof(NO));
 	if (novo == NULL)
 	{
+		cout << "Erro ao alocar memória para o novo elemento.\n";
 		return;
 	}
 
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
-	novo->prox = NULL;
+	
+	novo->prox = topo;
+	topo = novo;
 
-
+	cout << "Elemento " << novo->valor << " inserido no topo da pilha." << endl;
 }
 
 void pop()
 {
+	if (topo == NULL) {
+		cout << "Pilha vazia." << endl;
+		return;
+	}
 
-	
-
+	NO* aux = topo;
+	cout << "Elemento removido: " << aux->valor << endl;
+	topo = topo->prox;
+	free(aux);
 }
 
